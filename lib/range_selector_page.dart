@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fondations/randomizer_page.dart';
 import 'package:flutter_fondations/range_selector_form.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-class RangeSelectorPage extends HookWidget {
+class RangeSelectorPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
 
   RangeSelectorPage({
@@ -12,8 +11,6 @@ class RangeSelectorPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final min = useState<int>(0);
-    final max = useState<int>(0);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -22,8 +19,6 @@ class RangeSelectorPage extends HookWidget {
       ),
       body: RangeSelectorForm(
         formKey: formKey,
-        minValueSelector: (value) => min.value = value,
-        maxValueSelector: (value) => max.value = value,
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
@@ -34,10 +29,7 @@ class RangeSelectorPage extends HookWidget {
             formKey.currentState?.save();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => RandomizerPage(
-                  min: min.value,
-                  max: max.value,
-                ),
+                builder: (context) => const RandomizerPage(),
               ),
             );
           }
